@@ -108,7 +108,7 @@ The whole program is short enough to read in one sitting. [Open the village in t
 
 Children make mistakes, and that is where a lot of the learning happens. So VeeLang never shows a cryptic error. If a child types `draw cirle`, it asks whether they meant `circle`. If a colour is misspelt, it suggests the closest one. Every message is written for a child, and every one comes with a suggestion for what to try next.
 
-![The VeeLang playground](/images/veelang/playground.jpg)
+![The VeeLang playground helping with a typo: line 7 says draw cirle, and the help panel says "I don't know 'cirle'. Did you mean 'circle'?"](/images/veelang/mistake.jpg)
 
 ## Safe to hand to a child
 
