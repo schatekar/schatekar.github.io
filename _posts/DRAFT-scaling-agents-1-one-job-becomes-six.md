@@ -66,6 +66,6 @@ Splitting the god agent into twelve solves the context problem. It also gives us
 4. **Knowing when a contract is finished.** Twelve agents finish at different times. Something has to know when the last one is done so the next stage can start. If two finish at the same moment, both can think they were last. Or neither does.
 5. **Sharing context.** This is the sidenote from earlier. Each agent now sees a small part of the contract, but some of what it needs was found by another agent.
 
-The first four are the orchestration problem. How I solved them gets its own post later in this series. Sharing context across multiple agents is an interesting problem of its own. I will talk about my approach to it in a separate post. Before that, the next post looks at a different kind of split, one that didn't need any of this pain to find.
+The first four are the orchestration problem. How I solved them gets its own post later in this series. Sharing context across multiple agents is an interesting problem of its own. I will talk about my approach to it in a separate post. Before that, the next post looks at another split. That one we made up front, using the single responsibility principle, before the agent had a chance to struggle.
 
 If your agent works for one job and struggles with six, try giving it less to read before you give it more to think with.
