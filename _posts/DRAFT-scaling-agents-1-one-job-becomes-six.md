@@ -12,32 +12,33 @@ The short version of this first post: an agent that does one job well will not s
 
 ## One agent, one job
 
-Say you need to pull structured data out of legal contracts. You start small. One agent, one job: find the parties to the contract.
+I'll use data extraction from legal contracts as the example in this post. It draws a close parallel to a production agentic system I have built.
 
-This works well. Your contracts are long, around 80 pages each, but the parties are named near the top. You get a prompt that does the job, you test it on a few hundred contracts and the results are good. Everyone is happy.
+We started small. One agent, one job: find the parties to the contract.
 
-Then the scope grows. Now the business wants the parties, the obligations, the payment terms, the termination clauses, the liability caps and the renewal dates. Some of those are tricky. A clause can say that a new payment term takes effect next year, and the agent has to know the difference between what is true today and what will be true later.
+It worked well. The contracts were long, around 80 pages each, but the parties are named near the top. We got a prompt that did the job, tested it on a few hundred contracts and the results were good.
 
-One job has become six.
+Then the scope grew. The business wanted the parties, the obligations, the payment terms, the termination clauses, the liability caps and the renewal dates. Some of those are tricky. A clause can say that a new payment term takes effect next year, and the agent has to know the difference between what is true today and what will be true later.
 
-## What everyone tries first
+One job had become six.
 
-Nobody's first thought is to break the agent down. It doesn't come naturally. You have an agent that works, so you try to make it do more. In my experience, people reach for these, roughly in this order:
+## What we tried first
+
+Breaking the agent down was not our first thought. I don't think it is anyone's. You have an agent that works, so you try to make it do more. We went through the obvious options, roughly in this order:
 
 1. Add more instructions to the prompt and keep tuning it.
 2. Switch to a bigger model.
 3. Turn up the reasoning effort. Most models now have a setting for how long they think before answering.
-4. Run the whole thing as one long conversation, so the agent can work through the contract one section at a time.
 
-Each of these is worth trying, and each has a catch.
+Each of these helped a little, and each had a catch.
 
 A longer prompt means every instruction competes with every other one. The agent that was good at finding the parties now has five other jobs in its head while it does that one.
 
 A bigger model and more reasoning cost more and take longer on every contract. If you are processing a few contracts, that is fine. If you are processing thousands, you feel it.
 
-A long conversation has its own problems. As the context grows, the quality of the answers drops. This is often called context rot. And whatever the agent noted early in the conversation can go stale. It might hold on to a payment term from page 12 that page 60 changed.
+There is a fourth option: run the whole thing as one long conversation, so the agent works through the contract one section at a time. That has its own problems. As the context grows, the quality of the answers drops. This is often called context rot. And whatever the agent noted early in the conversation can go stale. It might hold on to a payment term from page 12 that page 60 changed.
 
-None of these approaches fixes the real problem, which took us a while to see.
+None of these fixed the real problem, which took us a while to see.
 
 ## Too much context, not too little capability
 
