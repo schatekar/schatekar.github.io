@@ -62,7 +62,7 @@ Splitting the god agent into twelve solves the context problem. It also gives us
 
 1. **Handing work over.** The god agent used to do everything in one go. Now twelve agents have to pass work to each other in the right order. Each extraction agent waits on its discovery agent, and something has to carry the result from one to the other.
 2. **Failures.** A model call times out, or an agent returns something malformed. With one agent you would just run it again. With twelve agents working through thousands of contracts, the system has to notice, retry on its own and know when to give up.
-3. **Retries that repeat work.** If an agent wrote part of its output before it failed, the retry can write it again. You need to decide what happens to the first attempt.
+3. **Retries that repeat work.** If an agent wrote part of its output before it failed, the retry can write it again. You need to decide what happens to the first attempt. In other words, each agent's work has to be idempotent: running it twice should leave the same result as running it once.
 4. **Knowing when a contract is finished.** Twelve agents finish at different times. Something has to know when the last one is done so the next stage can start. If two finish at the same moment, both can think they were last. Or neither does.
 5. **Sharing context.** This is the sidenote from earlier. Each agent now sees a small part of the contract, but some of what it needs was found by another agent.
 
