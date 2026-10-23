@@ -36,7 +36,9 @@ A longer prompt means every instruction competes with every other one. The agent
 
 A bigger model and more reasoning cost more and take longer on every contract. If you are processing a few contracts, that is fine. If you are processing thousands, you feel it.
 
-There is a fourth option: run the whole thing as one long conversation, so the agent works through the contract one section at a time. That has its own problems. As the context grows, the quality of the answers drops. This is often called context rot. And whatever the agent noted early in the conversation can go stale. It might hold on to a payment term from page 12 that page 60 changed.
+We also considered a fourth option, though we didn't go far with it: run the whole thing as one long conversation. It is natural to picture a person chatting with a bot when you hear that, but it doesn't have to be. A Python loop can send the agent a fixed set of messages, one after another. Find the parties. Now find the payment terms. Now the termination clauses. Every answer stays in the context for the next question.
+
+That has its own problems. As the context grows, the quality of the answers drops. This is often called context rot. Whatever the agent noted early in the conversation can also go stale. It might hold on to a payment term from page 12 that page 60 changed. And sooner or later you hit the model's context window limit. At that point you can start over or compact the context. Starting over loses what the agent has worked out so far. Compacting means a summary decides what the agent remembers. Neither is great.
 
 None of these fixed the real problem, which took us a while to see.
 
