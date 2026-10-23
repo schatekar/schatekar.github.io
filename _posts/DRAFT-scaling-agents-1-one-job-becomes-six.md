@@ -46,13 +46,13 @@ None of these fixed the real problem.
 
 Some contracts were too long to fit into a single agent's context. And even when one did fit, most of what the agent was reading had nothing to do with what it was looking for. The payment terms of an 80 page contract might live on three pages. The other 77 are noise for that job.
 
+> **A sidenote.** Even those three pages are rarely enough on their own. The payment terms only make full sense alongside facts from other parts of the contract: who the parties are, which jurisdiction applies, how the terms are defined. Once the work is split across agents, that information sits with a different agent. Splitting cuts out the noise. It also splits the context. So how do agents share what they know without each one going back to read all 80 pages?
+
 So we split the agent in two. A discovery agent finds the sections of the contract that are relevant. An extraction agent pulls the data out of those sections only. The extraction agent no longer sees 80 pages. It sees far less.
 
 Even with the split, we could not reach our quality threshold across a broad range of contracts. Finding the payment terms is a different job from finding the termination clauses. They are written differently and they sit in different places. So the split went one level further: a discovery agent and an extraction agent for each kind of data. Six kinds of data, six pairs of agents.
 
 Each agent now has one job and only the context that job needs. The prompts got shorter. Each one could be tested on its own and changed without breaking the others.
-
-> **A sidenote, and probably a post of its own.** Three pages are rarely enough on their own. The payment terms only make full sense alongside facts from other parts of the contract: who the parties are, which jurisdiction applies, how the terms are defined. That information has already been found, but by a different agent. Splitting the work cut out the noise. It also split the context. So how do agents share what they know without each one going back to read all 80 pages?
 
 ## The problem you just created
 
