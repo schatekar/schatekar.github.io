@@ -46,7 +46,7 @@ None of these fixed the real problem.
 
 Some contracts were too long to fit into a single agent's context. And even when one did fit, most of what the agent was reading had nothing to do with what it was looking for. The payment terms of an 80 page contract might live on three pages. The other 77 are noise for that job.
 
-So we split the agent in two. A discovery agent finds the sections of the contract that are relevant. An extraction agent pulls the data out of those sections only. The extraction agent no longer sees 80 pages. It sees three.
+So we split the agent in two. A discovery agent finds the sections of the contract that are relevant. An extraction agent pulls the data out of those sections only. The extraction agent no longer sees 80 pages. It sees far less.
 
 Then we realised that even this was not enough. Finding the payment terms is a different job from finding the termination clauses. They are written differently and they sit in different places. So the split went one level further: a discovery agent and an extraction agent for each kind of data. Six kinds of data, six pairs of agents.
 
