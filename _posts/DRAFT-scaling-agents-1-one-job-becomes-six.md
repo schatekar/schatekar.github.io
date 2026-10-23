@@ -56,8 +56,14 @@ Each agent now has one job and only the context that job needs. The prompts got 
 
 ## The problem we just created
 
-Splitting one agent into twelve solves the context problem. It also gives us a new one. How do these agents hand work to each other? How do you know when a contract is finished? What happens when one of them fails halfway through?
+Splitting one agent into twelve solves the context problem. It also gives us new ones. Most of them have nothing to do with AI. They are the problems you get in any system where work is spread across many workers.
 
-That is the orchestration problem, and it gets its own post later in this series. Before that, the next post looks at a different kind of split, one that didn't need any of this pain to find.
+1. **Handing work over.** One agent used to do everything in one go. Now twelve agents have to pass work to each other in the right order. Each extraction agent waits on its discovery agent, and something has to carry the result from one to the other.
+2. **Failures.** A model call times out, or an agent returns something malformed. With one agent you would just run it again. With twelve agents working through thousands of contracts, the system has to notice, retry on its own and know when to give up.
+3. **Retries that repeat work.** If an agent wrote part of its output before it failed, the retry can write it again. You need to decide what happens to the first attempt.
+4. **Knowing when a contract is finished.** Twelve agents finish at different times. Something has to know when the last one is done so the next stage can start. If two finish at the same moment, both can think they were last. Or neither does.
+5. **Sharing context.** This is the sidenote from earlier. Each agent now sees a small part of the contract, but some of what it needs was found by another agent.
+
+The first four are the orchestration problem. How I solved them gets its own post later in this series, and so does sharing context. Before that, the next post looks at a different kind of split, one that didn't need any of this pain to find.
 
 If your agent works for one job and struggles with six, try giving it less to read before you give it more to think with.
