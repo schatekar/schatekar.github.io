@@ -56,6 +56,7 @@ The queue is one way to do this. I have used two others on different systems, an
 | When an agent fails | Your code deals with it | Retries per task, then the job is marked as not completed | Retry rules are part of the workflow definition |
 | Knowing when it is done | The planner decides it has its answer | You build it yourself: the status table, the lock and the last agent sending the message | The service keeps track for you |
 | Fits best when | A user is waiting and the agents need to go back and forth | There is a lot of batch work and you want full control | The steps are known up front and you would rather not run the plumbing |
+
 ## What it cost
 
 Splitting the agent fixed the context problem from the first post. In return, we had to build and run real infrastructure. That trade was worth it for us. It is worth knowing about before you make it, because a demo with one agent shows you none of this.

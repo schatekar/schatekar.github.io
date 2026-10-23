@@ -52,6 +52,8 @@ Then we realised that even this was not enough. Finding the payment terms is a d
 
 Each agent now has one job and only the context that job needs. The prompts got shorter. Each one could be tested on its own and changed without breaking the others.
 
+> **A sidenote, and probably a post of its own.** Three pages are rarely enough on their own. The payment terms only make full sense alongside facts from other parts of the contract: who the parties are, which jurisdiction applies, how the terms are defined. That information has already been found, but by a different agent. Splitting the work cut out the noise. It also split the context. So how do agents share what they know without each one going back to read all 80 pages?
+
 ## The problem you just created
 
 Splitting one agent into twelve solves the context problem. It also gives you a new one. How do these agents hand work to each other? How do you know when a contract is finished? What happens when one of them fails halfway through?
