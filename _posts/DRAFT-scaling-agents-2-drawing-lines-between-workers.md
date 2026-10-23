@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "Drawing lines between agents"
-excerpt: "When one worker agent is doing several different kinds of work, split it by the kind of work, before it starts to struggle. Then draw a second set of lines, for which agents may call which."
+title: "Splitting an agent before it becomes a god agent"
+excerpt: "A research assistant started with a planner and one general worker. As the product grew, that worker picked up web search, document reading and API calls on top of its own reasoning. It was turning into a god agent. We split it by the kind of work, one worker per source of data, without waiting for it to struggle. Then we wrote down which agents may call which. Those rules made some bugs, like agents calling each other in a loop, impossible."
 tweet:
 published: false
 ---
 
 This is the second post in a series on building and scaling agentic systems. In the first one, I stretched a single agent until it became a god agent and had to be split. This one is about a split we made before it got that far, and about the decision that comes straight after any split: which agents get to talk to which.
 
-The short version: when one worker agent is doing several different kinds of work, split it by the kind of work. You don't have to wait for it to struggle first. Then draw a second set of lines, for who may call whom. Get those right and some bugs, like agents calling each other in a loop, can't happen at all.
+The short version: a research assistant started with a planner and one general worker. As the product grew, that worker picked up web search, document reading and API calls on top of its own reasoning. It was turning into a god agent. We split it by the kind of work, one worker per source of data, without waiting for it to struggle. Then we wrote down which agents may call which. Those rules made some bugs, like agents calling each other in a loop, impossible.
 
 ## The setup
 
