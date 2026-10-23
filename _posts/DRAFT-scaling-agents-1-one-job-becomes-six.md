@@ -16,7 +16,7 @@ I'll use data extraction from legal contracts as the example in this post. It dr
 
 We started small. One agent, one job: find the parties to the contract.
 
-It worked well. The contracts were long, around 80 pages each, but the parties are named near the top. We got a prompt that did the job, tested it on a few hundred contracts and the results were good.
+It worked well. The contracts were long, often 80 pages or more, but the parties are named near the top. We got a prompt that did the job, tested it on a few hundred contracts and the results were good.
 
 Then the scope grew. The business wanted the parties, the obligations, the payment terms, the termination clauses, the liability caps and the renewal dates. Some of those are tricky. A clause can say that a new payment term takes effect next year, and the agent has to know the difference between what is true today and what will be true later.
 
@@ -44,7 +44,7 @@ None of these fixed the real problem.
 
 ## Too much context, not too little capability
 
-The contracts were too large to fit into a single agent's context. And even when one did fit, most of what the agent was reading had nothing to do with what it was looking for. The payment terms of an 80 page contract might live on three pages. The other 77 are noise for that job.
+Some contracts were too long to fit into a single agent's context. And even when one did fit, most of what the agent was reading had nothing to do with what it was looking for. The payment terms of an 80 page contract might live on three pages. The other 77 are noise for that job.
 
 So we split the agent in two. A discovery agent finds the sections of the contract that are relevant. An extraction agent pulls the data out of those sections only. The extraction agent no longer sees 80 pages. It sees three.
 
