@@ -10,8 +10,6 @@ This is the third post in a series on building and scaling agentic systems. In t
 
 The short version: once one agent becomes many, you have a distributed system, whether you meant to build one or not. The agents are new. The plumbing is not, and most of what we already know about queues and retries still applies.
 
-As before, the contract example is not the system I built. It runs closely parallel to it.
-
 ## Three questions you didn't have before
 
 With one agent, you call it and wait. With a dozen, you have to answer three questions.

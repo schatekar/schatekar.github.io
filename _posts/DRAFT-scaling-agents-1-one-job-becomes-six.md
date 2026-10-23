@@ -8,9 +8,7 @@ published: false
 
 For the last two years, a large part of my work has been building agentic systems and then scaling them. Getting an agent to work in a demo is easy now. Getting it to do more, reliably, is where most of the effort goes. This series is about that second part.
 
-The short version of this first post: an agent that does one job well will not stay that way once you ask it to do six. The instinct is to give it a longer prompt, a bigger model or more thinking time. Those help, up to a point. Past that point, they stop paying off. What works is breaking the job into smaller pieces, each handled by an agent that only sees what it needs.
-
-The example I use in this series is not the system I built. It is close enough that every lesson carries over, and far enough that I'm not giving away anything that isn't mine to give. The numbers are made up too, though they are inspired by real ones.
+The short version of this first post: an agent that does one job well will not stay that way once you ask it to do six. The instinct is to give it a longer prompt, a bigger model or more thinking time. Those help, up to a point. Past that point, they stop paying off. What works is breaking the job into smaller pieces, each handled by an agent that is very good at that one thing. That brings its own challenges. Some are new. Others can be handled with what we have learned about distributed system design over the years.
 
 ## One agent, one job
 

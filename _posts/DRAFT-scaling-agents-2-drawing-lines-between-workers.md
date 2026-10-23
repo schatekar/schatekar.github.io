@@ -10,8 +10,6 @@ This is the second post in a series on building and scaling agentic systems. In 
 
 The short version: when one worker agent is doing several different kinds of work, split it by the kind of work. You don't have to wait for it to fail first. The split is the easy part. Getting the pieces to work together is where the effort goes.
 
-The example in this post is not the system I built. It is close enough that the lessons carry over, and far enough that I'm not giving away anything that isn't mine to give.
-
 ## The setup
 
 Picture a research assistant. A user asks it a long, detailed question. Something like "Find mid-sized logistics companies in Germany that opened a new warehouse in the last two years, check what the press said about them, compare them with the spreadsheet I've uploaded and tell me which ones look most exposed to rising fuel costs."
