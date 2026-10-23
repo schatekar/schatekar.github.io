@@ -54,9 +54,9 @@ Even with the split, we could not reach our quality threshold across a broad ran
 
 Each agent now has one job and only the context that job needs. The prompts got shorter. Each one could be tested on its own and changed without breaking the others.
 
-## The problem you just created
+## The problem we just created
 
-Splitting one agent into twelve solves the context problem. It also gives you a new one. How do these agents hand work to each other? How do you know when a contract is finished? What happens when one of them fails halfway through?
+Splitting one agent into twelve solves the context problem. It also gives us a new one. How do these agents hand work to each other? How do you know when a contract is finished? What happens when one of them fails halfway through?
 
 That is the orchestration problem, and it gets its own post later in this series. Before that, the next post looks at a different kind of split, one that didn't need any of this pain to find.
 
