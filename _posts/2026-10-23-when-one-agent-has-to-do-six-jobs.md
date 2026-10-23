@@ -3,6 +3,7 @@ layout: post
 title: "When one agent has to do six jobs"
 date: 2026-10-23 12:21:00 +0100
 excerpt: "An agent that does one job well will not stay that way once you ask it to do six. The instinct is to give it a longer prompt, a bigger model or more thinking time. Those help, up to a point. Past that point, they stop paying off. What works is breaking the job into smaller pieces, each handled by an agent that only sees what it needs."
+image: /images/scaling-agents/1-cover.png
 tweet:
 published: true
 ---

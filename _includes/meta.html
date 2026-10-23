@@ -16,6 +16,12 @@
     <meta property="og:title" content="{{ page.title }}" />
     <meta property="twitter:title" content="{{ page.title }}" />
     {% endif %}
+    {% assign abs_url = site.url | replace: 'http://', 'https://' %}
+    {% if page.image %}{% assign og_image = page.image | prepend: abs_url %}{% else %}{% assign og_image = site.avatar %}{% endif %}
+    <meta property="og:image" content="{{ og_image }}" />
+    <meta property="og:url" content="{{ page.url | prepend: abs_url }}" />
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}" />
+    <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}" />
     {% if page.tags %}
     <meta itemprop="keywords" content="{{ page.tags | join: ',' }}" />
     {% for tag in page.tags %}
