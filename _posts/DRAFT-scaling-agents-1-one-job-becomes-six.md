@@ -40,7 +40,7 @@ We also considered a fourth option, though we didn't go far with it: run the who
 
 That has its own problems. As the context grows, the quality of the answers drops. This is often called context rot. Whatever the agent noted early in the conversation can also go stale. It might hold on to a payment term from page 12 that page 60 changed. And sooner or later you hit the model's context window limit. At that point you can start over or compact the context. Starting over loses what the agent has worked out so far. Compacting means a summary decides what the agent remembers. Neither is great.
 
-None of these fixed the real problem, which took us a while to see.
+None of these fixed the real problem.
 
 ## Too much context, not too little capability
 
