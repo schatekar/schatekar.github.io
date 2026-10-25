@@ -14,17 +14,15 @@ The short version: splitting a god agent doesn't always have to turn into a dist
 
 I'll use a research assistant as the example in this post. It draws a close parallel to a production agentic system I have built.
 
-A user asks it a long, detailed question. Something like "Find mid-sized logistics companies in Germany that opened a new warehouse in the last two years, check what the press said about them, compare them with the spreadsheet I've uploaded and tell me which ones look most exposed to rising fuel costs."
+It started with a narrow scope. A user asked a question about data we already had, and the assistant fetched that data from our backend APIs and reasoned about it. There were two kinds of agent. A planner broke the question into steps. A general worker took each step and did it, calling the APIs when a step needed data.
 
-A question like that needs data from three places. Some comes from your own backend APIs, some from the open web and some from the file the user uploaded. Then something has to reason across all of it.
+That worked, so the scope grew. Users wanted answers that went beyond our own data, so the worker learned to search the web, scrape pages and make sense of what it found. Then users wanted to bring their own data, so it learned to read through whatever they uploaded. Each addition made sense on its own. Each one went to the worker, because that was the agent that did the work.
 
-The first version had two kinds of agent. A planner broke the question into steps. A general worker took each step and did it.
-
-As the product evolved, more and more work landed on that one worker. It searched the web, scraped pages and made sense of what it found. It read through whatever the user uploaded. It called backend APIs and reasoned about the data that came back. And it still did the plain reasoning steps the planner handed it.
+Before long, users were asking questions like "Find mid-sized logistics companies in Germany that opened a new warehouse in the last two years, check what the press said about them, compare them with the spreadsheet I've uploaded and tell me which ones look most exposed to rising fuel costs." A question like that needs data from all three places, and then something has to reason across all of it. The same worker was doing every part of it, along with the plain reasoning steps the planner handed it.
 
 That is a god agent again, but it got there by a different route. In the first post, the god agent came from too much context. This one came from too many responsibilities. That is even closer to the God Class it is named after. Nobody sets out to build a God Class. It grows one reasonable addition at a time.
 
-The single responsibility principle says a class should have one reason to change. An agent should too. Searching the web and reasoning about the results is not the same job as reading a user's documents. Neither is the same as talking to a backend API. You can see that on a whiteboard before you write a single prompt.
+The single responsibility principle says a class should have one reason to change. An agent should too. Searching the web and reasoning about the results is not the same job as reading a user's documents. Neither is the same as talking to a backend API. That is easy to see on a whiteboard. It is much harder to see while you are adding one feature at a time.
 
 ## The split
 
