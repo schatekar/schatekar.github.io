@@ -55,13 +55,7 @@ We used the first. I built this with the OpenAI Agents SDK, but the same two pat
 
 I wanted to start simple. It began as a proof of concept, and one process was the simplest thing that could work. It worked well enough that it carried into the product.
 
-One process has a few things going for it. A worker's result goes straight back to the planner as an ordinary object. There is nothing to serialise, no queue between agents and no status table to tell you when the work is done. A whole request shows up as one trace, so when something goes wrong you can follow it from top to bottom.
-
 Failures still happen, and you handle them in code. The planner retried a worker that failed. Depending on the kind of failure, the worker also had its own retry. Getting those two levels right is where most of the detail is.
-
-What you give up is everything the queue in the first post gave us. If the process dies, the work in flight dies with it. There is no picking up from where it stopped. You can't scale one worker separately from the others. And deploying a new version is harder while requests are still running.
-
-For a research assistant answering one question at a time, that trade was fine. For the legal contract extraction in the [first post](/when-one-agent-has-to-do-six-jobs/), with thousands of contracts running in the background, it wouldn't have been.
 
 ## Watch for recursion
 
@@ -73,6 +67,27 @@ Most frameworks give you limits for this: a maximum number of turns, a maximum d
 
 If you are giving agents other agents as tools, draw the call graph before you write the prompts. Any path that leads back to where it started needs either a base case or to not exist.
 
+## What one process gives you
+
+Starting simple was my reason. There are a few more, and they are the ones usually given for keeping a multi-agent workflow in one process.
+
+1. **It is the simplest thing that works.** There is no queue, no separate deployment for each worker and no status table. You can add those later if you need them.
+2. **Passing data is easy.** A worker's result goes straight back to the caller as an ordinary object. There is nothing to serialise and nothing to store in between.
+3. **It is fast.** There is no queue hop between agents. That adds up when the planner calls workers many times to answer one question.
+4. **One trace per request.** The whole request shows up as one tree of calls. When something goes wrong, you can follow it from top to bottom.
+5. **Failures are handled in code.** A retry is a few lines next to the call it protects. You decide what to retry and how many times. That is where our two levels of retry lived.
+
+## What it costs
+
+Most of what you give up is what the queue in the first post gave us.
+
+1. **A crash loses the work in flight.** If the process dies, every agent call in it dies too. There is no picking up from where it stopped. The user has to ask again.
+2. **Deploying gets harder.** A new version can't go out cleanly while requests are still running. You either wait for them to finish or cut them off.
+3. **You can't scale one worker on its own.** If the web worker is the slow one, you have to scale the whole process to give it more room.
+4. **One bad worker affects the rest.** All the agents share the same process. A worker that hangs or eats memory slows down or takes down the others with it.
+
+For a research assistant answering one question at a time, those costs were fine. For the legal contract extraction in the [first post](/when-one-agent-has-to-do-six-jobs/), with thousands of contracts running in the background, they wouldn't have been.
+
 ## What's next
 
-The next post goes back to the queue, and to the problems the first post left open: handing over work, failures, retries and knowing when the work is done.
+The next post goes back to the queue. It covers how I solved the problems the first post left open: handing over work, failures, retries and knowing when the work is done. Those are the problems a queue makes you face, and the ones one process lets you put off.
