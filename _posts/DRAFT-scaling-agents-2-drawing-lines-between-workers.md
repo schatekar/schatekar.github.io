@@ -20,6 +20,8 @@ That worked, so the scope grew. Users wanted answers that went beyond our own da
 
 Before long, users were asking questions like "Find mid-sized logistics companies in Germany that opened a new warehouse in the last two years, check what the press said about them, compare them with the spreadsheet I've uploaded and tell me which ones look most exposed to rising fuel costs." A question like that needs data from all three places, and then something has to reason across all of it. The same worker was doing every part of it, along with the plain reasoning steps the planner handed it.
 
+![The planner calls one general worker as a tool. That worker talks to the backend APIs, the web and uploaded files, and does the reasoning steps itself](/images/scaling-agents/2-one-worker.png)
+
 That is a god agent again, but it got there by a different route. In the first post, the god agent came from too much context. This one came from too many responsibilities. That is even closer to the God Class it is named after. Nobody sets out to build a God Class. It grows one reasonable addition at a time.
 
 The single responsibility principle says a class should have one reason to change. An agent should too. Searching the web and reasoning about the results is not the same job as reading a user's documents. Neither is the same as talking to a backend API. That is easy to see on a whiteboard. It is much harder to see while you are adding one feature at a time.
@@ -32,9 +34,11 @@ So we split the general worker, one worker per source of data.
 2. The web worker searched the web, scraped pages and did a first pass of analysis on what it found.
 3. The document worker dealt with the files the user uploaded.
 4. The API worker called the backend APIs, fetched data and reasoned about it.
-5. The memory worker kept what the others had found and fetched it back when needed. It is interesting enough to get its own post.
+5. The memory worker kept what the others had found and fetched it back when needed. When something was missing, it called the web, document or API worker to fill the gap. It is interesting enough to get its own post.
 
 Every source has its own quirks. Web pages are messy and sometimes wrong. Uploaded documents come in every format a user can think of. APIs return structured data, sometimes far more of it than you asked for. A worker that deals with only one of these can have instructions about only that one.
+
+![The planner calls five workers as tools: general, web, document, API and memory. The memory worker in turn calls the web, document and API workers to fill gaps](/images/scaling-agents/2-split-workers.png)
 
 ## Agents as tools
 
