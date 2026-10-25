@@ -28,21 +28,21 @@ The single responsibility principle says a class should have one reason to chang
 
 ## The split
 
-So we split the general worker, one worker per source of data.
+So we split the general worker. Each source of data got its own worker, and a memory worker sat in front of them.
 
 1. The general worker kept the reasoning tasks the planner gave it, and nothing else.
-2. The web worker searched the web, scraped pages and did a first pass of analysis on what it found.
-3. The document worker dealt with the files the user uploaded.
-4. The API worker called the backend APIs, fetched data and reasoned about it.
-5. The memory worker kept what the others had found and fetched it back when needed. When something was missing, it called the web, document or API worker to fill the gap. It is interesting enough to get its own post.
+2. The memory worker was where the other agents went for data. It checked what was already known first. If something was missing, it asked the right source worker. It is interesting enough to get its own post.
+3. The web worker searched the web, scraped pages and did a first pass of analysis on what it found.
+4. The document worker dealt with the files the user uploaded.
+5. The API worker called the backend APIs, fetched data and reasoned about it.
 
 Every source has its own quirks. Web pages are messy and sometimes wrong. Uploaded documents come in every format a user can think of. APIs return structured data, sometimes far more of it than you asked for. A worker that deals with only one of these can have instructions about only that one.
 
-![The planner calls five workers as tools: general, web, document, API and memory. The memory worker in turn calls the web, document and API workers to fill gaps](/images/scaling-agents/2-split-workers.png)
+![The planner calls the general worker and the memory worker. The general worker calls the memory worker. The memory worker calls the web, document and API workers](/images/scaling-agents/2-split-workers.png)
 
 ## Agents as tools
 
-Here is where this system is different from the one in the first post. There is no queue. The planner calls each worker the same way it calls any other tool. The worker runs, returns its result and the planner carries on. All of it happens inside one process.
+Here is where this system is different from the one in the first post. There is no queue. The planner calls the general worker and the memory worker the same way it calls any other tool. The general worker calls the memory worker the same way, and so does the memory worker when it needs a source worker. Each worker runs, returns its result and the caller carries on. All of it happens inside one process.
 
 Most agent frameworks support two ways for one agent to involve another.
 
