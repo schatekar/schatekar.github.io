@@ -69,7 +69,7 @@ If you are giving agents other agents as tools, draw the call graph before you w
 
 ## What one process gives you
 
-Starting simple was my reason. There are a few more, and they are the ones usually given for keeping a multi-agent workflow in one process.
+Starting simple was my reason, but it is not the only good one. Keeping a multi-agent workflow in one process has real advantages.
 
 1. **It is the simplest thing that works.** There is no queue, no separate deployment for each worker and no status table. You can add those later if you need them.
 2. **Passing data is easy.** A worker's result goes straight back to the caller as an ordinary object. There is nothing to serialise and nothing to store in between.
