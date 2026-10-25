@@ -8,6 +8,8 @@ tweet:
 published: true
 ---
 
+> This is the first post in a series on building and scaling agentic systems. The second post, [Agents calling agents in one process](/agents-calling-agents-in-one-process/), is now out.
+
 For the last two years, a large part of my work has been building agentic systems and then scaling them. Getting an agent to work in a demo is easy now. Getting it to do more, reliably, is where most of the effort goes. This series is about that second part.
 
 The short version of this first post: an agent that does one job well will not stay that way once you ask it to do six. The instinct is to give it a longer prompt, a bigger model or more thinking time. Those help, up to a point. Past that point, they stop paying off. What works is breaking the job into smaller pieces, each handled by an agent that is very good at that one thing. That brings its own challenges. Some are new. Others can be handled with what we have learned about distributed system design over the years.
@@ -68,6 +70,6 @@ Splitting the god agent into twelve solves the context problem. It also gives us
 4. **Knowing when a contract is finished.** Twelve agents finish at different times. Something has to know when the last one is done so the next stage can start. If two finish at the same moment, both can think they were last. Or neither does.
 5. **Sharing context.** This is the sidenote from earlier. Each agent now sees a small part of the contract, but some of what it needs was found by another agent.
 
-The first four are the orchestration problem. How I solved them gets its own post later in this series. Sharing context across multiple agents is an interesting problem of its own. I will talk about my approach to it in a separate post. Before that, the next post looks at another split. That one we made up front, using the single responsibility principle, before the agent had a chance to struggle.
+The first four are the orchestration problem. How I solved them gets its own post later in this series. Sharing context across multiple agents is an interesting problem of its own. I will talk about my approach to it in a separate post. Before that, the [next post](/agents-calling-agents-in-one-process/) looks at a split that stayed inside one process, with agents calling each other as tools.
 
 If your agent works for one job and struggles with six, try giving it less to read before you give it more to think with.
