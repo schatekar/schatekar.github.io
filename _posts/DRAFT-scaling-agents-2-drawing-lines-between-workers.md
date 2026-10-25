@@ -57,7 +57,7 @@ Failures still happen, and you handle them in code. The planner retried a worker
 
 What you give up is everything the queue in the first post gave us. If the process dies, the work in flight dies with it. There is no picking up from where it stopped. You can't scale one worker separately from the others. And deploying a new version is harder while requests are still running.
 
-For a research assistant answering one question at a time, that trade was fine. For thousands of contracts running in the background, it wouldn't have been.
+For a research assistant answering one question at a time, that trade was fine. For the legal contract extraction in the [first post](/when-one-agent-has-to-do-six-jobs/), with thousands of contracts running in the background, it wouldn't have been.
 
 ## Watch for recursion
 
