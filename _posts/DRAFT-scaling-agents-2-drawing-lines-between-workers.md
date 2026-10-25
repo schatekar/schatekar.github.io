@@ -81,7 +81,7 @@ Starting simple was my reason, but it is not the only good one. Keeping a multi-
 
 Most of what you give up is what the queue in the first post gave us.
 
-1. **A crash loses the work in flight.** If the process dies, every agent call in it dies too. There is no picking up from where it stopped. The user has to ask again.
+1. **A crash loses the work in flight, unless you plan for it.** If the process dies, every agent call in it dies too. Picking up from where it stopped is possible. Anthropic [describes doing that](https://www.anthropic.com/engineering/multi-agent-research-system) in its own multi-agent research system, with regular checkpoints so agents resume instead of starting over. But you have to build it yourself. A queue gives you much of it for free.
 2. **Deploying gets harder.** A new version can't go out cleanly while requests are still running. You either wait for them to finish or cut them off.
 3. **You can't scale one worker on its own.** If the web worker is the slow one, you have to scale the whole process to give it more room.
 4. **One bad worker affects the rest.** All the agents share the same process. A worker that hangs or eats memory slows down or takes down the others with it.
