@@ -83,7 +83,7 @@ Most of what you give up is what the queue in the first post gave us.
 
 1. **A crash loses the work in flight, unless you plan for it.** If the process dies, every agent call in it dies too. Picking up from where it stopped is possible. Anthropic [describes doing that](https://www.anthropic.com/engineering/multi-agent-research-system) in its own multi-agent research system, with regular checkpoints so agents resume instead of starting over. But you have to build it yourself. A queue gives you much of it for free.
 2. **Every agent ships together.** The agents share a process, so they share a deployment. Deploying safely is still possible, with blue/green for example, if the workflow is packaged and hosted for it. But you can't roll out or roll back one worker on its own. A change to the web worker means redeploying all of them.
-3. **You can't scale one worker on its own.** If the web worker is the slow one, you have to scale the whole process to give it more room.
+3. **You can't scale one worker on its own.** Every worker runs as many instances as the process does. If you need ten general workers running at once and only two of each of the others, you can't have that. You run ten copies of everything.
 4. **One bad worker affects the rest.** All the agents share the same process. A worker that hangs or eats memory slows down or takes down the others with it.
 
 For a research assistant answering one question at a time, those costs were fine. For the legal contract extraction in the [first post](/when-one-agent-has-to-do-six-jobs/), with thousands of contracts running in the background, they wouldn't have been.
