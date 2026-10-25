@@ -6,7 +6,7 @@ tweet:
 published: false
 ---
 
-This is the second post in a series on building and scaling agentic systems. In the first one, a god agent was split into twelve agents running on a queue, and that turned into a distributed system. This post looks at a split that stayed inside one process.
+This is the second post in a series on building and scaling agentic systems. In the [first one](/when-one-agent-has-to-do-six-jobs/), a god agent was split into twelve agents running on a queue, and that turned into a distributed system. This post looks at a split that stayed inside one process.
 
 The short version: splitting a god agent doesn't always have to turn into a distributed system. In a research assistant I built, the agents called each other as tools, inside one process. That kept things simple. It also has limits, and one risk worth naming: recursion.
 
