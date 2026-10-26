@@ -41,13 +41,15 @@ Agents fail. A model call times out, a response comes back malformed or the agen
 
 Celery took care of most of it. If an agent failed or didn't finish, the task was retried a set number of times. If it still hadn't finished after the last retry, the whole job was marked as not completed. That gave someone a clear place to start: look at what went wrong, fix that agent and run the job again.
 
+![Attempt 1 times out, retry 1 returns a malformed response, retry 2 doesn't finish, and the job is marked not completed](/images/scaling-agents/3-failures.png)
+
 ## Retries that repeat work
 
 Retries raise a question of their own. If an agent wrote part of its output before it failed, does the retry write it again?
 
 For us it didn't matter. Each agent wrote its output to a database table and overwrote whatever was there, so a retry replaced the earlier attempt instead of adding to it. Running an agent twice left the same result as running it once. That was a design decision that fit our requirements. It won't fit every system, but every system needs an answer to the question.
 
-![Top: attempt 1 times out, retry 1 returns a malformed response, retry 2 doesn't finish, and the job is marked not completed. Bottom: attempt 1 writes a partial payment terms result for a contract and fails. The retry writes the same row, so the result is replaced, not added](/images/scaling-agents/3-failures-retries.png)
+![Attempt 1 writes a partial payment terms result for a contract and then fails. The retry writes the same row, so the result is replaced, not added](/images/scaling-agents/3-retries.png)
 
 ## Knowing when a contract has finished processing
 
