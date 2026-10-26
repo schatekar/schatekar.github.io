@@ -1,18 +1,18 @@
 ---
 layout: post
 title: "Layout-aware chunking and retrieval"
-excerpt: "The chunk that best matches a question is often not the one that answers it. The heading that says what it applies to, or the exception in the next paragraph, sits in a chunk that scored low. Layout-aware chunking rebuilds the document's outline from how it looks, and returns the whole section a match belongs to."
+excerpt: "The chunk that best matches a question is usually relevant, but it may not be enough to answer it fully. The heading that says what it applies to, or an exception in the next paragraph, can sit in a chunk that scored low. That text can complete the answer or change it entirely. Layout-aware chunking rebuilds the document's outline from how it looks, and returns the whole section a match belongs to."
 tweet:
 published: false
 ---
 
 Most retrieval pipelines cut a document into chunks, score each chunk against the question and hand the best ones to the model. That works until the answer depends on text the best chunk doesn't contain.
 
-The short version: the chunk that best matches a question is often not the one that answers it. The heading that says what it applies to, or the exception in the next paragraph, sits in a chunk that scored low. Layout-aware chunking rebuilds the document's outline from how it looks, then returns the whole section a match belongs to, with every heading above it.
+The short version: the chunk that best matches a question is usually relevant, but it may not be enough to answer it fully. The heading that says what it applies to, or an exception in the next paragraph, can sit in a chunk that scored low. That text can complete the answer or change it entirely. Layout-aware chunking rebuilds the document's outline from how it looks, then returns the whole section a match belongs to, with every heading above it.
 
-## The chunk that matches isn't the chunk that answers
+## The chunk that matches isn't always the whole answer
 
-Each chunk is scored on its own text. Whether it answers the question often depends on text somewhere else. That text scores low and is left out. The model gets a fragment that looks complete and answers confidently.
+Each chunk is scored on its own text. The full answer often depends on text somewhere else, and that text can score low and be left out. The model gets a fragment that looks complete and answers confidently.
 
 Here is a small refund policy, cut into fixed-size chunks. On the right is what this post ends up returning instead.
 
