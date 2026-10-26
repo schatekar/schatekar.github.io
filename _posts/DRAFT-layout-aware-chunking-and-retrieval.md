@@ -123,6 +123,14 @@ Rebuilding the headings from the layout fixed most of it. In a test on PDFs, the
 
 It also helps other agents that read documents. In that contract system, a discovery agent finds the parts of a contract that matter, and those parts rarely make sense on their own. In a [research assistant where agents call each other as tools](/agents-calling-agents-in-one-process/), a document worker reads whatever the user uploads. Both do better when the text they get comes with the headings that say what it is about.
 
+## Reading only the part you need
+
+There is another use, and it may be the more common one. An agent often needs one paragraph from a very long page.
+
+Take the research assistant again. To answer a question about fuel costs, its web worker searches for what analysts are saying about whether fuel prices are rising or falling. One of the results is a policy document, fifty pages long. The assistant needs one paragraph of it. Nobody wants to send fifty pages to the model for that. It costs more, it is slower, and the paragraph that matters gets buried in everything else.
+
+With the tree, the agent doesn't have to. It builds the tree for that one document, searches it by keyword and sends the model only the matching section, with its breadcrumb. The model gets one section instead of fifty pages, and it still knows which part of the document that section came from.
+
 ## Limits
 
 It is not free, and it doesn't fix everything.
