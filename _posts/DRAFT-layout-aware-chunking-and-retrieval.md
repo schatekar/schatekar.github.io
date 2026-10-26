@@ -131,12 +131,12 @@ Take the research assistant again. To answer a question about fuel costs, its we
 
 With the tree, the agent doesn't have to. It builds the tree for that one document, searches it by keyword and sends the model only the matching section, with its breadcrumb. The model gets one section instead of fifty pages, and it still knows which part of the document that section came from.
 
-## Limits
+## What it takes to make it work
 
-It is not free, and it doesn't fix everything.
+It doesn't work out of the box. Each of these needs effort, testing and tuning, but each one has an answer.
 
-1. **It needs a layout.** Plain text has no fonts or sizes to read. Scanned PDFs need the page images read first.
-2. **Rendering costs time.** Rendering an HTML page in a browser is slower than reading its text.
-3. **Some documents are badly laid out.** If the author made body text bold for emphasis, it can look like a heading. Short and bold is a good rule, not a perfect one.
+1. **Documents without a layout.** Plain text has no fonts or sizes to read. Numbering, blank lines and lines in capitals still show where sections start, and they can stand in for font sizes. Scanned PDFs need their page images read first.
+2. **Rendering takes time.** Rendering an HTML page in a browser is slower than reading its text. Build the tree once for each document and keep it, so later questions don't pay for it again.
+3. **Badly laid out documents.** If the author made body text bold for emphasis, it can look like a heading. Short and bold is a good starting rule. Test it on a sample of your own documents and adjust it until the outline matches what a person reading the page would see.
 
 If your answers are often right in what they say but wrong about what it applies to, look at what your chunks lose before you look at your prompts.
