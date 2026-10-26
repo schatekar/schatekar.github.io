@@ -137,7 +137,7 @@ With the tree, the agent doesn't have to. It builds the tree for that one docume
 
 It doesn't work out of the box. There are three things you will need to put effort into, test and tune.
 
-1. **Documents without a layout.** Plain text has no fonts or sizes to read. Numbering, blank lines and lines in capitals still show where sections start, and they can stand in for font sizes. Scanned PDFs need their page images read first.
+1. **Documents without a layout.** Plain text has no fonts or sizes to read. Numbering, blank lines and lines in capitals still show where sections start, and they can stand in for font sizes. Most PDFs have a text layer, and libraries such as PyMuPDF read the fonts and sizes straight from it. Only scanned PDFs, which are just pictures of pages, need a vision model to read them first.
 2. **Rendering takes time.** Rendering an HTML page in a browser is slower than reading its text. Build the tree once for each document and keep it, so later questions don't pay for it again.
 3. **Badly laid out documents.** If the author made body text bold for emphasis, it can look like a heading. Short and bold is a good starting rule. Test it on a sample of your own documents and adjust it until the outline matches what a person reading the page would see.
 
