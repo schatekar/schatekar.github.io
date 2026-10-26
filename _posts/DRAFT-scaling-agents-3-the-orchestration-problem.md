@@ -68,7 +68,6 @@ The queue is one way to do this. I have used two others, and each one suits a di
 | | Inside an agent framework | On a task queue you run yourself | On a managed workflow service |
 |---|---|---|---|
 | What I used | OpenAI Agents SDK | Celery, plus a status table in a database | AWS Step Functions |
-| Where | The research assistant from the second post | The contract extraction system in this post | Another extraction pipeline |
 | How work moves between agents | The planner calls other agents the same way it calls any tool | Each agent puts the next task on the queue | The workflow definition says which step runs next |
 | When an agent fails | Your code deals with it | Retries per task, then the job is marked as not completed | Retry rules are part of the workflow definition |
 | Knowing when it is done | The planner decides it has its answer | You build it yourself: the status table, the lock and the last agent sending the message | The service keeps track for you |
