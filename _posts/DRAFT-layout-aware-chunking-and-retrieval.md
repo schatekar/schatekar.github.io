@@ -42,7 +42,7 @@ A person reading the page finds the headings just by looking at it. Short text t
 
 ![A page with a 24px bold title, 18px bold subheadings and 14px body text becomes an outline: the title is H1, the subheadings are H2 and the body text hangs under the heading above it](/images/layout-aware-chunking/2-outline-from-layout.png)
 
-1. **Recover the outline.** Render the HTML page in a browser, or read the fonts out of the PDF. Treat short text that is larger or bolder than the body text as a heading. Rank the headings by size, and hang every block of text under the nearest heading above it.
+1. **Recover the outline.** Render the HTML page in a browser, or read the fonts out of the PDF. The most common text size is the body text. Short text that is larger or bolder than that is a heading. A page can use a dozen sizes, though, and making each one its own level gives you far too many. Group sizes that are close together into a few bins, at most six, the way HTML has H1 to H6. The biggest bin is the top level. Then hang every block of text under the nearest heading above it.
 2. **Find the match.** Search the nodes of that tree for the question, by keywords or by embeddings.
 3. **Expand along the tree.** Return the whole section the match belongs to, with its ancestor headings as a breadcrumb, such as `Refund Policy › Annual plans`.
 4. **Deduplicate by node.** Keep track of which sections were already sent, so a follow-up question returns only new text.
@@ -55,7 +55,7 @@ def build_tree(blocks, body_size):
     open_sections = [root]
     for block in blocks:                      # in reading order
         if is_heading(block, body_size):      # short, and bigger or bolder than body text
-            level = heading_level(block.size) # bigger font, higher level
+            level = size_bin(block.size)      # one of up to six bins, biggest first
             while open_sections[-1].level >= level:
                 open_sections.pop()
             section = Section(level, block.text)
