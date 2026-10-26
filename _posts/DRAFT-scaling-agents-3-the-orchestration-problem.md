@@ -63,14 +63,14 @@ There is a catch. If two agents finish at almost the same moment, both can write
 
 ## Ways to orchestrate agents
 
-The queue is one way to do this. There are others, and each one suits a different kind of problem. I have used the first three. I haven't used graph frameworks such as LangGraph myself, but they are common enough to belong in the comparison.
+The queue is one way to do this. There are others, and each one suits a different kind of problem. I have used the first three. The fourth is what I call managed agentic workflow solutions, such as LangGraph, CrewAI Flows, Microsoft Agent Framework and Google's Agent Development Kit. I haven't used them myself, but they are common enough to belong in the comparison.
 
-| | Inside an agent framework | On a task queue you run yourself | On a managed workflow service | As a graph in a graph framework |
+| | Inside an agent framework | On a task queue you run yourself | On a managed workflow service | On a managed agentic workflow solution |
 |---|---|---|---|---|
-| Example | OpenAI Agents SDK | Celery, plus a status table in a database | AWS Step Functions | LangGraph |
-| How work moves between agents | An agent calls other agents the same way it calls any tool | Each agent puts the next task on the queue | The workflow definition says which step runs next | Edges in the graph say which node runs next, and the nodes share one state |
-| When an agent fails | Your code deals with it | Retries per task, then the job is marked as not completed | Retry rules are part of the workflow definition. When the last retry fails, the whole workflow is marked as not completed | Retry rules are set per node. With a checkpointer, a failed run can resume from its last saved step |
-| Knowing when it is done | The calling agent decides it has its answer | You build it yourself: the status table, the lock and the last agent sending the message | The service keeps track for you | The run ends when it reaches the end of the graph |
+| Example | OpenAI Agents SDK | Celery, plus a status table in a database | AWS Step Functions | LangGraph, CrewAI Flows, Microsoft Agent Framework, Google ADK |
+| How work moves between agents | An agent calls other agents the same way it calls any tool | Each agent puts the next task on the queue | The workflow definition says which step runs next | The workflow is defined in code as steps and the links between them, and the steps share state |
+| When an agent fails | Your code deals with it | Retries per task, then the job is marked as not completed | Retry rules are part of the workflow definition. When the last retry fails, the whole workflow is marked as not completed | Most let you set retries per step and save state as the run goes, so a failed run can resume where it stopped |
+| Knowing when it is done | The calling agent decides it has its answer | You build it yourself: the status table, the lock and the last agent sending the message | The service keeps track for you | The run ends when the workflow reaches its last step |
 | Fits best when | You want to start simple and the work fits inside one request | There is a lot of batch work and you want full control | The steps are known up front and you would rather not run the plumbing | The steps branch or loop, and you want the flow defined in code |
 
 ## What it cost
