@@ -75,6 +75,13 @@ The queue is one way to do this. There are others, and each one suits a differen
 
 ## What it cost
 
-Splitting the agent fixed the context problem from the first post. In return, we had to build and run real infrastructure. That trade was worth it for us. It is worth knowing about before you make it, because a demo with one agent shows you none of this.
+Splitting the agent fixed the context problem from the first post. In return, we had a distributed system to build and run.
 
-If your agents are going to run as more than one piece, design the plumbing the way you would for any other distributed system, and do it early.
+1. **More to run.** A message broker, the Celery workers and the database behind the status table all have to be kept up and watched.
+2. **Harder to follow one contract.** Its work is spread across twelve agents and their queues. Finding out why one result is wrong means piecing together logs from several places, not reading one call stack.
+3. **Every agent has to be safe to run twice.** Retries only help if a second run doesn't spoil the result of the first.
+4. **More to deploy.** Twelve images can be deployed separately, but each one also has to be built, versioned and kept compatible with the others.
+
+That trade was worth it for us. A demo with one agent shows you none of this, so it is worth knowing about before you make the split.
+
+If your agents are going to run as more than one piece, design them the way you would any other distributed system, and do it early.
