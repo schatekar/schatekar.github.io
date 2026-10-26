@@ -21,7 +21,7 @@ The first post ended with five problems that splitting the god agent created. Fo
 
 The fifth, sharing context between agents, is a different kind of problem. I will cover it separately.
 
-None of these four is an AI problem. They are the same problems you get in any system where work is spread across many workers. That is good news, because the answers have been around for a long time.
+None of these four are new problems brought about by agentic AI. They are the same problems you get in any system where work is spread across many workers. That is good news, because the answers have been around for a long time.
 
 ## Handing work over
 
