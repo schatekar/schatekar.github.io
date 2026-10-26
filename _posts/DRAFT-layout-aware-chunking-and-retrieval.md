@@ -113,7 +113,7 @@ Parent-document retrieval shares the idea of matching small and returning bigger
 
 ## Where it came from
 
-This came out of a real failure, in a system much like the contract extraction I described in the [first post](/when-one-agent-has-to-do-six-jobs/).
+This came out of a real failure, in an extraction system much like the [contract extraction agents](/when-one-agent-has-to-do-six-jobs/) I have written about before.
 
 Picture a framework agreement with several supplier schedules back to back. Each schedule has its own payment terms, under a heading that is just bold text. We asked an agent for one supplier's payment terms. The chunk it got started halfway through the previous schedule, so it reported the wrong supplier's terms as the right one's. That is a lost boundary, and nothing in the chunk said so.
 
@@ -121,7 +121,7 @@ Picture a framework agreement with several supplier schedules back to back. Each
 
 Rebuilding the headings from the layout fixed most of it. In a test on PDFs, the share of reads that mixed up two records went from most of them to fewer than one in ten.
 
-It also helps the agents I wrote about earlier in this series. In the first post, a discovery agent finds the parts of a contract that matter, and I noted that those parts rarely make sense on their own. In the [second post](/agents-calling-agents-in-one-process/), a document worker reads whatever the user uploads. Both do better when the text they get comes with the headings that say what it is about.
+It also helps other agents that read documents. In that contract system, a discovery agent finds the parts of a contract that matter, and those parts rarely make sense on their own. In a [research assistant where agents call each other as tools](/agents-calling-agents-in-one-process/), a document worker reads whatever the user uploads. Both do better when the text they get comes with the headings that say what it is about.
 
 ## Limits
 
