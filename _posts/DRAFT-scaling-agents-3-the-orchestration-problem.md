@@ -25,9 +25,13 @@ None of these four are new problems brought about by agentic AI. They are the sa
 
 ## Handing work over
 
-We packaged each agent as its own Docker image. At runtime, the agents ran as tasks in a queue-backed, event-driven system built on Celery. A contract arriving put a task on the queue. The discovery agent for each kind of data picked it up, found the parts of the contract that mattered and put a task on the queue for the matching extraction agent.
+We built a queue-backed, event-driven system on Celery, a task queue for Python. Each agent ran as a Celery task, and work moved between agents as messages on a queue. A contract arriving put a task on the queue. The discovery agent for each kind of data picked it up, found the parts of the contract that mattered and put a task on the queue for the matching extraction agent.
 
 No agent called another one directly. Each one did its job, said what should happen next and moved on. That is the opposite of the research assistant in the second post, where the planner called each worker and waited for the answer.
+
+This setup also lets you scale each agent on its own. Celery can route each kind of task to its own queue, and each queue can have its own workers. If the payment terms extraction agent falls behind, you add workers for its queue and leave the rest alone. With every agent in one process, as in the [second post](/agents-calling-agents-in-one-process/), that wasn't possible.
+
+Each agent was also packaged as its own Docker image, so it could be deployed separately from the others. A fix to one agent didn't mean redeploying the other eleven.
 
 ![A contract arrives and goes on a queue. Discovery agents for payment terms, termination and liability caps pick it up, six kinds in all. Each puts a task on its own queue for the matching extraction agent, and the extraction agents write to a results table](/images/scaling-agents/3-handoff.png)
 
