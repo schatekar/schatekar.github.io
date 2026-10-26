@@ -17,7 +17,7 @@ The first post ended with five problems that splitting the god agent created. Fo
 1. Handing work over from one agent to the next.
 2. Failures.
 3. Retries that repeat work.
-4. Knowing when a contract is finished.
+4. Knowing when a contract has finished processing end to end.
 
 The fifth, sharing context between agents, is a different kind of problem. I will cover it separately.
 
@@ -45,7 +45,7 @@ For us it didn't matter. Each agent wrote its output to a database table and ove
 
 ![Top: attempt 1 times out, retry 1 returns a malformed response, retry 2 doesn't finish, and the job is marked not completed. Bottom: attempt 1 writes a partial payment terms result for a contract and fails. The retry writes the same row, so the result is replaced, not added](/images/scaling-agents/3-failures-retries.png)
 
-## Knowing when a contract is finished
+## Knowing when a contract has finished processing
 
 This one took more thought than I expected.
 
