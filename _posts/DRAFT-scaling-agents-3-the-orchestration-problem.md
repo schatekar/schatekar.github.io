@@ -69,7 +69,7 @@ The queue is one way to do this. I have used two others, and each one suits a di
 |---|---|---|---|
 | What I used | OpenAI Agents SDK | Celery, plus a status table in a database | AWS Step Functions |
 | How work moves between agents | The planner calls other agents the same way it calls any tool | Each agent puts the next task on the queue | The workflow definition says which step runs next |
-| When an agent fails | Your code deals with it | Retries per task, then the job is marked as not completed | Retry rules are part of the workflow definition |
+| When an agent fails | Your code deals with it | Retries per task, then the job is marked as not completed | Retry rules are part of the workflow definition. When the last retry fails, the whole workflow is marked as not completed |
 | Knowing when it is done | The planner decides it has its answer | You build it yourself: the status table, the lock and the last agent sending the message | The service keeps track for you |
 | Fits best when | You want to start simple and the work fits inside one request | There is a lot of batch work and you want full control | The steps are known up front and you would rather not run the plumbing |
 
