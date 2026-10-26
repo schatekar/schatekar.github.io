@@ -29,6 +29,8 @@ We packaged each agent as its own Docker image. At runtime, the agents ran as ta
 
 No agent called another one directly. Each one did its job, said what should happen next and moved on. That is the opposite of the research assistant in the second post, where the planner called each worker and waited for the answer.
 
+![A contract arrives and goes on a queue. Discovery agents for payment terms, termination and liability caps pick it up, six kinds in all. Each puts a task on its own queue for the matching extraction agent, and the extraction agents write to a results table](/images/scaling-agents/3-handoff.png)
+
 ## When an agent fails
 
 Agents fail. A model call times out, a response comes back malformed or the agent simply doesn't finish the job. With one agent you would see this and run it again. With twelve running across thousands of contracts, you need the system to handle it.
@@ -41,6 +43,8 @@ Retries raise a question of their own. If an agent wrote part of its output befo
 
 For us it didn't matter. Each agent wrote its output to a database table and overwrote whatever was there, so a retry replaced the earlier attempt instead of adding to it. Running an agent twice left the same result as running it once. That was a design decision that fit our requirements. It won't fit every system, but every system needs an answer to the question.
 
+![Top: attempt 1 times out, retry 1 returns a malformed response, retry 2 doesn't finish, and the job is marked not completed. Bottom: attempt 1 writes a partial payment terms result for a contract and fails. The retry writes the same row, so the result is replaced, not added](/images/scaling-agents/3-failures-retries.png)
+
 ## Knowing when a contract is finished
 
 This one took more thought than I expected.
@@ -48,6 +52,8 @@ This one took more thought than I expected.
 Every contract got a row in a database table that held the status of each agent working on it. When an agent finished, it wrote its status to that table. Then it checked whether every other agent was done too. If it was the last one, it put a message on the queue saying all agents were done. That message started the next stage of the workflow, the part that comes after the agents have done their work.
 
 There is a catch. If two agents finish at almost the same moment, both can write their status, both can check and both can decide they were last. Or neither does. We used a database lock so that only one agent at a time could update the row and check it. Simple, and it worked.
+
+![A status row with six kinds of data, four done and two running. Without a lock, both remaining agents write done, both check, and both send the all-done message. With a lock, the first agent sees the other still running and sends nothing, and the second sends exactly one message](/images/scaling-agents/3-finished.png)
 
 ## Three ways I have orchestrated agents
 
