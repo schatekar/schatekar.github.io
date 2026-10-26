@@ -47,6 +47,13 @@ A person reading the page finds the headings just by looking at it. Short text t
 3. **Expand along the tree.** Return the whole section the match belongs to, with its ancestor headings as a breadcrumb, such as `Refund Policy › Annual plans`.
 4. **Deduplicate by node.** Keep track of which sections were already sent, so a follow-up question returns only new text.
 
+There are two ways to do the search in step 2.
+
+1. **Search only the leaf nodes.** Each leaf carries the breadcrumb of every heading above it, right up to the document title. A match on one line still tells the model which section it is in, and what that section is part of.
+2. **Search any node.** When a node matches, return it with all of its children. This can return more text than the question needs. But if the match is on a section title, the whole section comes back with it, and that is often what answers the question.
+
+The second one needs a limit, or a match on the document title returns the whole document. More on that below.
+
 The first step is the only unusual part, and it is shorter than it sounds.
 
 ```python
