@@ -14,20 +14,9 @@ The short version: the chunk that best matches a question is often not the one t
 
 Each chunk is scored on its own text. Whether it answers the question often depends on text somewhere else. That text scores low and is left out. The model gets a fragment that looks complete and answers confidently.
 
-Here is a small refund policy, cut into fixed-size chunks.
+Here is a small refund policy, cut into fixed-size chunks. On the right is what this post ends up returning instead.
 
-```
-chunk 1   Refund Policy
-          Monthly plans
-          Monthly plans can be cancelled at any time.
-chunk 2   The current month is not refunded.
-          Annual plans
-          Within 30 days of purchase, annual plans are refunded in full.
-chunk 3   After 30 days, refunds are prorated for the unused months.
-chunk 4   Exception: plans bought at a promotional price are final sale.
-          How to request
-          Email billing@acme.example with your order number.
-```
+![On the left, a refund policy cut into four fixed chunks. The best match is chunk 3, while the "Annual plans" heading sits in chunk 2 and the promotional exception in chunk 4. On the right, the same policy as a tree, where the whole "Annual plans" section is returned around the match](/images/layout-aware-chunking/1-chunks-vs-tree.png)
 
 Ask it "Can I get a refund after 30 days?" and chunk 3 is the best match by a distance. The model answers "Yes, refunds after 30 days are prorated." That is wrong twice. The rule only applies to annual plans, and the heading that says so is in chunk 2. Plans bought at a promotional price can't be refunded at all, and that line is in chunk 4.
 
@@ -50,6 +39,8 @@ So a splitter that looks for heading markup sees one long section where a reader
 ## Rebuilding the outline from the layout
 
 A reader finds the headings by looking at the page. Short text that is bigger or bolder than the text around it is a heading. Bigger means higher up. That is all layout-aware chunking does.
+
+![A page with a 24px bold title, 18px bold subheadings and 14px body text becomes an outline: the title is H1, the subheadings are H2 and the body text hangs under the heading above it](/images/layout-aware-chunking/2-outline-from-layout.png)
 
 1. **Recover the outline.** Render the HTML page in a browser, or read the fonts out of the PDF. Treat short text that is larger or bolder than the body text as a heading. Rank the headings by size, and hang every block of text under the nearest heading above it.
 2. **Find the match.** Search the nodes of that tree for the question, by keywords or by embeddings.
@@ -97,6 +88,8 @@ Returning the whole section works well when sections are small. Some aren't. A l
 
 The second one fixes something the first can't. In the refund example, the line about promotional prices scores too low against the whole document to be returned. Inside "Annual plans", it only competes with two other lines, so it makes the cut. Text that looks unimportant against the whole document can be the second most relevant thing in its own section.
 
+![Step 1 searches the whole document and matches the prorated refunds line, while the exception scores too low. The search climbs one level to "Annual plans". Step 2 searches again inside that section only, and the exception now ranks second and is kept](/images/layout-aware-chunking/3-climb-then-search.png)
+
 ## Compared with other approaches
 
 None of this is the only way to give a chunk more context. Here is how it compares with the approaches I see most often.
@@ -116,6 +109,8 @@ Parent-document retrieval shares the idea of matching small and returning bigger
 This came out of a real failure, in a system much like the contract extraction I described in the [first post](/when-one-agent-has-to-do-six-jobs/).
 
 Picture a framework agreement with several supplier schedules back to back. Each schedule has its own payment terms, under a heading that is just bold text. We asked an agent for one supplier's payment terms. The chunk it got started halfway through the previous schedule, so it reported the wrong supplier's terms as the right one's. That is a lost boundary, and nothing in the chunk said so.
+
+![Two supplier schedules back to back. A fixed chunk starts at Supplier A's payment terms and runs into Supplier B's heading, so the agent reports 60 days for Supplier B. Layout-aware chunking returns Supplier B's section only, and the agent reports 30 days](/images/layout-aware-chunking/4-contract-boundary.png)
 
 Rebuilding the headings from the layout fixed most of it. In a test on PDFs, the share of reads that mixed up two records went from most of them to fewer than one in ten.
 
