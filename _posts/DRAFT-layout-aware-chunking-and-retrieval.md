@@ -34,11 +34,11 @@ The obvious fix is to split on headings instead of on size. Many libraries do th
 
 In HTML, a lot of headings are not heading tags. They are paragraphs made bigger and bolder with styling. When I checked a sample of a few hundred web pages, more than half of the headings were like that. PDFs are worse. They have no heading markup at all, only text drawn in different fonts at different sizes.
 
-So a splitter that looks for heading markup sees one long section where a reader sees ten.
+So a splitter that looks for heading markup sees one long section where a person reading the page sees ten.
 
 ## Rebuilding the outline from the layout
 
-A reader finds the headings by looking at the page. Short text that is bigger or bolder than the text around it is a heading. Bigger means higher up. That is all layout-aware chunking does.
+A person reading the page finds the headings just by looking at it. Short text that is bigger or bolder than the text around it is a heading. Bigger means higher up. That is all layout-aware chunking does.
 
 ![A page with a 24px bold title, 18px bold subheadings and 14px body text becomes an outline: the title is H1, the subheadings are H2 and the body text hangs under the heading above it](/images/layout-aware-chunking/2-outline-from-layout.png)
 
