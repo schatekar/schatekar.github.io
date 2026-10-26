@@ -133,7 +133,7 @@ With the tree, the agent doesn't have to. It builds the tree for that one docume
 
 ## What it takes to make it work
 
-It doesn't work out of the box. Each of these needs effort, testing and tuning, but each one has an answer.
+It doesn't work out of the box. There are three things you will need to put effort into, test and tune. None of them is a dead end.
 
 1. **Documents without a layout.** Plain text has no fonts or sizes to read. Numbering, blank lines and lines in capitals still show where sections start, and they can stand in for font sizes. Scanned PDFs need their page images read first.
 2. **Rendering takes time.** Rendering an HTML page in a browser is slower than reading its text. Build the tree once for each document and keep it, so later questions don't pay for it again.
