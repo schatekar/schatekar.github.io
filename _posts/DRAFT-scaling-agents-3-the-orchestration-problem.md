@@ -85,3 +85,5 @@ Splitting the agent fixed the context problem from the first post. In return, we
 That trade was worth it for us. A demo with one agent shows you none of this, so it is worth knowing about before you make the split.
 
 If your agents are going to run as more than one piece, design them the way you would any other distributed system, and do it early.
+
+The agents in this post only ever talked to each other and to a database. The next post looks at what changes when they have to work with the systems around them.
