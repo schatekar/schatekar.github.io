@@ -35,7 +35,7 @@ So we split the general worker. Each source of data got its own worker, and a me
 1. The general worker kept the reasoning tasks the planner gave it, and nothing else.
 2. The memory worker was where the other agents went for data. It checked what was already known first. If something was missing, it asked the right source worker. It is interesting enough to get its own post.
 3. The web worker searched the web, scraped pages and did a first pass of analysis on what it found.
-4. The document worker dealt with the files the user uploaded.
+4. The document worker dealt with the files the user uploaded. [Layout-aware chunking](/layout-aware-chunking-and-retrieval/) helps a worker like this find the right part of a long file.
 5. The API worker called the backend APIs, fetched data and reasoned about it.
 
 Every source has its own quirks. Web pages are messy and sometimes wrong. Uploaded documents come in every format a user can think of. APIs return structured data, sometimes far more of it than you asked for. A worker that deals with only one of these can have instructions about only that one.

@@ -1,9 +1,11 @@
 ---
 layout: post
 title: "Layout-aware chunking and retrieval"
+date: 2026-10-27 16:10:00 +0000
+image: /images/layout-aware-chunking/cover.png
 excerpt: "The chunk that best matches a question is usually relevant, but it may not be enough to answer it fully. The heading that says what it applies to, or an exception in the next paragraph, can sit in a chunk that scored low. That text can complete the answer or change it entirely. Layout-aware chunking rebuilds the document's outline from how it looks, and returns the whole section a match belongs to."
 tweet:
-published: false
+published: true
 ---
 
 Most retrieval pipelines cut a document into chunks, score each chunk against the question and hand the best ones to the model. That works until the answer depends on text the best chunk doesn't contain.
@@ -99,7 +101,7 @@ The second one fixes something the first can't. In the refund example, the line 
 
 ## Compared with other approaches
 
-None of this is the only way to give a chunk more context. Here is how it compares with the approaches I see most often.
+None of this is the only way to give a chunk more context. Here is how it compares with the approaches I have used elsewhere.
 
 | Approach | Where chunks are cut | What comes back |
 |---|---|---|

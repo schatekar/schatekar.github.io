@@ -54,7 +54,7 @@ Some contracts were too long to fit into the god agent's context. And even when 
 
 > **A sidenote.** Even those three pages are rarely enough on their own. The payment terms only make full sense alongside facts from other parts of the contract: who the parties are, which jurisdiction applies, how the terms are defined. Once the work is split across agents, that information sits with a different agent. Splitting cuts out the noise. It also splits the context. So how do agents share what they know without each one going back to read all 80 pages?
 
-So we split the god agent in two. A discovery agent finds the sections of the contract that are relevant. An extraction agent pulls the data out of those sections only. The extraction agent no longer sees 80 pages. It sees far less.
+So we split the god agent in two. A discovery agent finds the sections of the contract that are relevant. An extraction agent pulls the data out of those sections only. The extraction agent no longer sees 80 pages. It sees far less. Finding the right sections is a retrieval problem, and I wrote about one way to solve it in [layout-aware chunking and retrieval](/layout-aware-chunking-and-retrieval/).
 
 Even with the split, we could not reach our quality threshold across a broad range of contracts. Finding the payment terms is a different job from finding the termination clauses. They are written differently and they sit in different places. So the split went one level further: a discovery agent and an extraction agent for each kind of data. Six kinds of data, six pairs of agents.
 
