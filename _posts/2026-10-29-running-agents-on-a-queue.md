@@ -1,9 +1,11 @@
 ---
 layout: post
 title: "Running agents on a queue"
+date: 2026-10-29 11:20:06 +0000
+image: /images/scaling-agents/3-cover.png
 excerpt: "Splitting one agent into twelve turned it into a distributed system. The problems that came with it, such as handing work over and retrying failed work, are the same ones any distributed system has. We solved them with a task queue, retries and a status table in a database."
 tweet:
-published: false
+published: true
 ---
 
 This is the third post in a series on building and scaling agentic systems. In the [first post](/when-one-agent-has-to-do-six-jobs/), a contract extraction agent grew until it had to be split into a discovery agent and an extraction agent for each kind of data. The [second post](/agents-calling-agents-in-one-process/) looked at a different split, where agents called each other as tools inside one process. This one goes back to the contracts, and to the problems that first split left open.

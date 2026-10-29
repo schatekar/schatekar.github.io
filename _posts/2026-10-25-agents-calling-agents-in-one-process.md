@@ -92,4 +92,4 @@ For a research assistant answering one question at a time, those costs were fine
 
 ## What's next
 
-The next post goes back to the queue. It covers how I solved the problems the first post left open: handing over work, failures, retries and knowing when the work is done. With one process, you can avoid most of these for a while. With a queue, you have to solve them from day one.
+The [next post](/running-agents-on-a-queue/) goes back to the queue. It covers how I solved the problems the first post left open: handing over work, failures, retries and knowing when the work is done. With one process, you can avoid most of these for a while. With a queue, you have to solve them from day one.
