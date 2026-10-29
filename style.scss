@@ -309,6 +309,42 @@ sub {
     bottom: -0.25em;
 }
 
+// Tables in posts: the reset strips all table styling, so add it back
+table {
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 1.5em 0;
+  width: 100%;
+
+  // Wide tables scroll sideways on a phone instead of squashing the columns
+  @include mobile {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: $lightGray;
+  color: $darkerGray;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+tbody td:first-child {
+  font-weight: bold;
+}
+
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
